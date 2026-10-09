@@ -1,2 +1,22 @@
 # GED-Midterm
+This readme is split into segments detailing the reasoning behind each criteria
 
+OOP:
+For OOP I used Inheritance, polymorphism, and  abstraction
+Inheritance was used by making a base enemy class. It held standard variables that would act as a baseline for what an enemy needed. From there I created the ghost enemy to inherit from the enemy class, and changed its movement functionality. This was done so that I didn't have to go in a remake the entire enemy script just to change a few lines on it, it saved time, resources and space.
+Polymorphism was also used for the enemy class. The base enemy class had a shared start function that located its rigidbody, collider, and the player object. Along with these the enemy class had collision & trigger enter functions that spanned through all enemy types, that would check if they hit a wall, or a bubble, which would then perform the result of the action. This was done this way to keep all enemy functions in a single area, allowing me to easily change core functions if needed without having to go to each enemy type and change it there. It also was used so that I didn't need to rewrite simple functions like get rigidbody get box collider etc, saving me time to focus on other parts of the midterm as well as saving up on space.
+Abstraction was used to make the basis for an enemy spawner. The abstract class was there to create the basic function that all other enemy spawners could then use. This was done so that I could make variants of the abstract enemy spawner to fit whatever needs I wanted, without having to recreate the core function, saving on time.
+
+SINGLETON PATTERN:
+I used the singleton pattern for a game manager. This game manager included spawning enemies, pausing/resuming the game and restarting the game on player death. Originally I also wanted to add a win condition ("goal") However due to my lack of knowledge of the game and time constraints I back pedaled on doing so. If i were to have implemented it in the project. It would have either tracked the players points/enemies killed and considered the game won if the player reached a certain amount, or the player would've had to survive for a certain amount of time. The singleton first runs from its own script, creating a game manager if the object doesn't already exist in the scene, and making sure it persists through restarts. Thee main game manager will then spawn enemies given to it by the enemy spawner, restart the game if the player chooses to after death, and pause/resume the game on player command. It exists alone and performs all needed tasks as 1 script. I used the singleton pattern in this way because I wanted to get some basic game functions down but didn't want to make multiple scripts for them, so instead I decided to put them all together into a game manager that relies only on itself, making bug fixing and changes easy as I only need to go into one area instead of multiple scripts.
+
+FACTORY PATTERN:
+I used the factory pattern to create an enemy spawner that spawns enemies at a random position in a certain range. I did this by first making an abstract enemy spawner class. A basis for each spawner to grab the spawning function, then I created the basic enemy spawner. This spawner inherited its functions from the base class enemy spawner, and had an overridden version of the spawn enemy function to fit its need. Then I made a variable in the game manager class that grabs the enemy spawner, and calls its spawn enemy function every 3 seconds. This was done so that I could make multiple enemy spawners if I had more time, each that corresponded to a specific enemy, and allowed me to make changes to cater towards that enemy.
+
+REFERENCE MATERIAL:
+The singleton script was used from my Game Engine Design project that I've been submitting for the weekly assignments and the lab. This was taken so that I could use it to keep the game manager in the scene permanently, allowing it to never be destroyed, and to help fuel the game manager class.
+
+The basis for the game manager was  also part of the same place that the singleton was apart of. I mainly grabbed the ideas from that game manager and then changed functions and variables around to fit the assigned midterm game
+
+NOTE:
+Ignore the bubble class. I made that script and immediately realized I didn't need it and I forgot to delete it due to focusing on the midterm and didn't want to waste my time.
